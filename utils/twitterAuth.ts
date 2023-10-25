@@ -1,22 +1,22 @@
 import passport from 'passport';
-import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
+import { Strategy as TwitterStrategy } from 'passport-twitter';
 import { StatusCodes } from 'http-status-codes';
-import ApiError from '../utils/ApiError';
+import ApiError from './ApiError';
 import { User} from '../models/user.model';
 
-export const googlePassport = passport.use(
-  new GoogleStrategy(
+export const twitterPassport = passport.use(
+  new TwitterStrategy(
     {
-      clientID: '486588801461-p7rctdsvdq0tp42617cf8m86bkjjvfnd.apps.googleusercontent.com',
-      clientSecret: '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',
-      callbackURL: 'http://localhost:3001/api/v1/auth/google/callback',
+      consumerKey: `${process.env.TWITTER_CONSUMER_KEY}`,
+      consumerSecret: `${process.env.TWITTER_CONSUMER_SECRET}`,
+      callbackURL: `${process.env.APP_URL_Render}/api/v1/auth/facebook/callback`,
     },
     async (accessToken, refreshToken, profile,done ) => {
       try {
         if(!profile) {
           return new ApiError({
-            en: 'Google authentication failed',
-            ar: 'فشل المصادقة من جوجل'
+            en: 'Facebook authentication failed',
+            ar: 'فشل المصادقة من فيسبوك'
           }, StatusCodes.BAD_REQUEST);
         }
         const existingUser = await User.findOne({ email: profile.emails?.[0]?.value });

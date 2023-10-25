@@ -1,14 +1,14 @@
 import passport from 'passport';
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 import { StatusCodes } from 'http-status-codes';
-import ApiError from '../utils/ApiError';
+import ApiError from './ApiError';
 import { User} from '../models/user.model';
 
 export const googlePassport = passport.use(
   new GoogleStrategy(
     {
-      clientID: `${process.env.GOOGLE_CLIENT_ID}`,
-      clientSecret: `${process.env.GOOGLE_CLIENT_SECRET}`,
+      clientID: `${process.env.TWITTER_CLIENT_ID}`,
+      clientSecret: `${process.env.TWITTER_CLIENT_SECRET}`,
       callbackURL: `${process.env.APP_URL_Render}/api/v1/auth/google/callback`,
     },
     async (accessToken, refreshToken, profile,done ) => {

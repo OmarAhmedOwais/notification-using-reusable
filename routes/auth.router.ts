@@ -3,7 +3,8 @@ import { validate } from "../middlewares/validation.middleware";
 import { protectedMiddleware } from "../middlewares/protected.middleware";
 import { googlePassport} from '../utils/googleAuth';
 import { facebookPassport } from '../utils/facebookAuth';
-import { authenticateWithGoogle,authenticateWithFacebook } from '../middlewares/passportAuth.middleware';
+import { twitterPassport } from '../utils/twitterAuth';
+import { authenticateWithGoogle,authenticateWithFacebook,authenticateWithTwitter } from '../middlewares/passportAuth.middleware';
 import { Request, Response } from "express";
 
 import {
@@ -80,6 +81,20 @@ authRoute.get('/facebook', authenticateWithFacebook);
 authRoute.get(
   '/facebook/callback',
   facebookPassport.authenticate('facebook',
+    {
+      session: false,
+
+    }),
+  expressAsyncHandler(async (req: Request, res: Response) => {
+    res.json({ data: req.user });
+  })
+);
+
+authRoute.get('/twitter', authenticateWithTwitter);
+
+authRoute.get(
+  '/twitter/callback',
+  twitterPassport.authenticate('twitter',
     {
       session: false,
 

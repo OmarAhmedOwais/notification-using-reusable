@@ -1,7 +1,7 @@
 import passport from 'passport';
 import { Strategy as FacebookStrategy } from 'passport-facebook';
 import { StatusCodes } from 'http-status-codes';
-import ApiError from '../utils/ApiError';
+import ApiError from './ApiError';
 import { User} from '../models/user.model';
 
 export const facebookPassport = passport.use(

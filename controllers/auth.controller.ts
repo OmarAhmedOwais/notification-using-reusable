@@ -5,7 +5,7 @@ import { StatusCodes } from "http-status-codes";
 import { Status } from "../interfaces/status/status.enum";
 import { User } from "../models/user.model";
 import ApiError from "../utils/ApiError";
-import { sendSMS } from "../utils/twilioSendSMS";
+import { sendSMS, verifyCaller } from "../utils/twilioSendSMS";
 // import { sendSMS } from "../utils/sendSMS";
 import { sendEmail } from "../utils/sendEmail";
 import { log } from "console";
@@ -42,7 +42,8 @@ export interface ResetPasswordInterface {
   newPassword: string;
 }
 // SMS Twilio
-const fromPhoneNumber = "+13306156837";  //"+9876543210"; // Replace with your Twilio number
+//const fromPhoneNumber = "+13306156837";  //"+9876543210"; // Replace with your Twilio number
+const fromPhoneNumber = "+19206452477";  //"+9876543210"; // Replace with your Twilio number
 
 // @desc    Register a new user
 // @route   POST /api/v1/auth/register
@@ -115,6 +116,7 @@ export const register = expressAsyncHandler(
       const messageBody = `Your Verification Code: ${verifiedCode}`;
       try {
         console.log("start sms")
+        //await verifyCaller(req.body.phone)
         await sendSMS({
           from: fromPhoneNumber,
           to: req.body.phone,

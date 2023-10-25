@@ -8,6 +8,7 @@ const validation_middleware_1 = require("../middlewares/validation.middleware");
 const protected_middleware_1 = require("../middlewares/protected.middleware");
 const googleAuth_1 = require("../utils/googleAuth");
 const facebookAuth_1 = require("../utils/facebookAuth");
+const twitterAuth_1 = require("../utils/twitterAuth");
 const passportAuth_middleware_1 = require("../middlewares/passportAuth.middleware");
 const auth_validator_1 = require("../validations/auth.validator");
 const auth_controller_1 = require("../controllers/auth.controller");
@@ -45,6 +46,12 @@ authRoute.get('/google/callback', googleAuth_1.googlePassport.authenticate('goog
 }));
 authRoute.get('/facebook', passportAuth_middleware_1.authenticateWithFacebook);
 authRoute.get('/facebook/callback', facebookAuth_1.facebookPassport.authenticate('facebook', {
+    session: false,
+}), (0, express_async_handler_1.default)(async (req, res) => {
+    res.json({ data: req.user });
+}));
+authRoute.get('/twitter', passportAuth_middleware_1.authenticateWithTwitter);
+authRoute.get('/twitter/callback', twitterAuth_1.twitterPassport.authenticate('twitter', {
     session: false,
 }), (0, express_async_handler_1.default)(async (req, res) => {
     res.json({ data: req.user });

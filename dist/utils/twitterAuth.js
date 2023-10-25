@@ -3,25 +3,25 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.facebookPassport = void 0;
+exports.twitterPassport = void 0;
 const passport_1 = __importDefault(require("passport"));
-const passport_facebook_1 = require("passport-facebook");
+const passport_twitter_1 = require("passport-twitter");
 const http_status_codes_1 = require("http-status-codes");
 const ApiError_1 = __importDefault(require("./ApiError"));
 const user_model_1 = require("../models/user.model");
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config({ path: "../config/config.env" });
-exports.facebookPassport = passport_1.default.use(new passport_facebook_1.Strategy({
-    clientID: `${process.env.FACEBOOK_CLIENT_ID}`,
-    clientSecret: `${process.env.FACEBOOK_CLIENT_SECRET}`,
-    callbackURL: `${process.env.APP_URL_Render}/api/v1/auth/facebook/callback`,
+exports.twitterPassport = passport_1.default.use(new passport_twitter_1.Strategy({
+    consumerKey: `${process.env.TWITTER_CONSUMER_KEY}`,
+    consumerSecret: `${process.env.TWITTER_CONSUMER_SECRET}`,
+    callbackURL: `${process.env.APP_URL_Render}/api/v1/auth/twitter/callback`,
 }, async (accessToken, refreshToken, profile, done) => {
     var _a, _b, _c, _d, _e, _f;
     try {
         if (!profile) {
             return new ApiError_1.default({
-                en: 'Facebook authentication failed',
-                ar: 'فشل المصادقة من فيسبوك'
+                en: 'Twitter authentication failed',
+                ar: 'فشل المصادقة من تويتر'
             }, http_status_codes_1.StatusCodes.BAD_REQUEST);
         }
         const existingUser = await user_model_1.User.findOne({ email: (_b = (_a = profile.emails) === null || _a === void 0 ? void 0 : _a[0]) === null || _b === void 0 ? void 0 : _b.value });

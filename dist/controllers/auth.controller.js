@@ -14,7 +14,8 @@ const twilioSendSMS_1 = require("../utils/twilioSendSMS");
 // import { sendSMS } from "../utils/sendSMS";
 const sendEmail_1 = require("../utils/sendEmail");
 // SMS Twilio
-const fromPhoneNumber = "+13306156837"; //"+9876543210"; // Replace with your Twilio number
+//const fromPhoneNumber = "+13306156837";  //"+9876543210"; // Replace with your Twilio number
+const fromPhoneNumber = "+19206452477"; //"+9876543210"; // Replace with your Twilio number
 // @desc    Register a new user
 // @route   POST /api/v1/auth/register
 // @access  Public
@@ -70,6 +71,7 @@ exports.register = (0, express_async_handler_1.default)(async (req, res, next) =
         const messageBody = `Your Verification Code: ${verifiedCode}`;
         try {
             console.log("start sms");
+            //await verifyCaller(req.body.phone)
             await (0, twilioSendSMS_1.sendSMS)({
                 from: fromPhoneNumber,
                 to: req.body.phone,

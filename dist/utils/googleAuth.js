@@ -7,11 +7,13 @@ exports.googlePassport = void 0;
 const passport_1 = __importDefault(require("passport"));
 const passport_google_oauth20_1 = require("passport-google-oauth20");
 const http_status_codes_1 = require("http-status-codes");
-const ApiError_1 = __importDefault(require("../utils/ApiError"));
+const ApiError_1 = __importDefault(require("./ApiError"));
 const user_model_1 = require("../models/user.model");
+const dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config({ path: "../config/config.env" });
 exports.googlePassport = passport_1.default.use(new passport_google_oauth20_1.Strategy({
-    clientID: `${process.env.GOOGLE_CLIENT_ID}`,
-    clientSecret: `${process.env.GOOGLE_CLIENT_SECRET}`,
+    clientID: `${process.env.TWITTER_CLIENT_ID}`,
+    clientSecret: `${process.env.TWITTER_CLIENT_SECRET}`,
     callbackURL: `${process.env.APP_URL_Render}/api/v1/auth/google/callback`,
 }, async (accessToken, refreshToken, profile, done) => {
     var _a, _b, _c, _d, _e, _f;

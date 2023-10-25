@@ -7,9 +7,9 @@ import { User} from '../models/user.model';
 export const googlePassport = passport.use(
   new GoogleStrategy(
     {
-      clientID: '486588801461-p7rctdsvdq0tp42617cf8m86bkjjvfnd.apps.googleusercontent.com',
-      clientSecret: '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',
-      callbackURL: 'http://localhost:3001/api/v1/auth/google/callback',
+      clientID: `${process.env.GOOGLE_CLIENT_ID}`,
+      clientSecret: `${process.env.GOOGLE_CLIENT_SECRET}`,
+      callbackURL: `${process.env.APP_URL_Render}/api/v1/auth/google/callback`,
     },
     async (accessToken, refreshToken, profile,done ) => {
       try {

@@ -63,7 +63,7 @@ app.all(
 
 const PORT = process.env.PORT || 3000;
 // app.listen(PORT, () => {
-//   console.log(`Server running:  ${process.env.APP_URL}`.green.bold);
+//   console.log(`Server running:  ${process.env.APP_URL_Render}`.green.bold);
 // });
 
 
@@ -103,5 +103,5 @@ io.on('connection', (socket: Socket) => {
 });
 // Start the HTTP server
 server.listen(PORT, () => {
-  console.log(`Server running:  ${process.env.APP_URL}`.green.bold);
+  console.log(`Server running:  ${process.env.APP_URL_Render}`.green.bold);
 });

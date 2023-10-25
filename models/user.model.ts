@@ -98,7 +98,7 @@ userSchema.pre("save", function (next) {
 }); 
 
 userSchema.virtual("imageUrl").get(function () {
-  return `${process.env.APP_URL}/uploads/${this.image}`;
+  return `${process.env.APP_URL_Render}/uploads/${this.image}`;
 });
 
 userSchema.methods.comparePassword = function (this: IUser, password: string) {

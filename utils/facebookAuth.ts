@@ -7,9 +7,9 @@ import { User} from '../models/user.model';
 export const facebookPassport = passport.use(
   new FacebookStrategy(
     {
-      clientID: '1501637110581056',
-      clientSecret: '43fbf882c9b7a598934ac200f56ce93e',
-      callbackURL: 'http://localhost:3001/api/v1/auth/facebook/callback',
+      clientID: `${process.env.FACEBOOK_CLIENT_ID}`,
+      clientSecret: `${process.env.FACEBOOK_CLIENT_SECRET}`,
+      callbackURL: `${process.env.APP_URL_Render}/api/v1/auth/facebook/callback`,
     },
     async (accessToken, refreshToken, profile,done ) => {
       try {

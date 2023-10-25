@@ -8,7 +8,6 @@ import morgan from "morgan";
 import router from "./mount";
 
 import "colors";
-import expressAsyncHandler from "express-async-handler";
 import ApiError from "./utils/ApiError";
 import { StatusCodes } from "http-status-codes";
 import http from "http";

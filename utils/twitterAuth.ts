@@ -9,14 +9,14 @@ export const twitterPassport = passport.use(
     {
       consumerKey: `${process.env.TWITTER_CONSUMER_KEY}`,
       consumerSecret: `${process.env.TWITTER_CONSUMER_SECRET}`,
-      callbackURL: `${process.env.APP_URL_Render}/api/v1/auth/facebook/callback`,
+      callbackURL: `${process.env.APP_URL_Render}/api/v1/auth/twitter/callback`,
     },
     async (accessToken, refreshToken, profile,done ) => {
       try {
         if(!profile) {
           return new ApiError({
-            en: 'Facebook authentication failed',
-            ar: 'فشل المصادقة من فيسبوك'
+            en: 'Twitter authentication failed',
+            ar: 'فشل المصادقة من تويتر'
           }, StatusCodes.BAD_REQUEST);
         }
         const existingUser = await User.findOne({ email: profile.emails?.[0]?.value });

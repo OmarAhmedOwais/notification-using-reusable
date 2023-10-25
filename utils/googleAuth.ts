@@ -3,7 +3,8 @@ import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 import { StatusCodes } from 'http-status-codes';
 import ApiError from './ApiError';
 import { User} from '../models/user.model';
-
+import dotenv from "dotenv";
+dotenv.config({ path: "../config/config.env" });
 export const googlePassport = passport.use(
   new GoogleStrategy(
     {

@@ -3,6 +3,8 @@ import { Strategy as FacebookStrategy } from 'passport-facebook';
 import { StatusCodes } from 'http-status-codes';
 import ApiError from './ApiError';
 import { User} from '../models/user.model';
+import dotenv from "dotenv";
+dotenv.config({ path: "../config/config.env" });
 
 export const facebookPassport = passport.use(
   new FacebookStrategy(

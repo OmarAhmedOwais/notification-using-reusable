@@ -13,6 +13,7 @@ const passportAuth_middleware_1 = require("../middlewares/passportAuth.middlewar
 const auth_validator_1 = require("../validations/auth.validator");
 const auth_controller_1 = require("../controllers/auth.controller");
 const express_async_handler_1 = __importDefault(require("express-async-handler"));
+const instgramAuth_1 = require("../utils/instgramAuth");
 const authRoute = (0, express_1.Router)();
 authRoute
     .route("/register")
@@ -46,6 +47,12 @@ authRoute.get('/google/callback', googleAuth_1.googlePassport.authenticate('goog
 }));
 authRoute.get('/facebook', passportAuth_middleware_1.authenticateWithFacebook);
 authRoute.get('/facebook/callback', facebookAuth_1.facebookPassport.authenticate('facebook', {
+    session: false,
+}), (0, express_async_handler_1.default)(async (req, res) => {
+    res.json({ data: req.user });
+}));
+authRoute.get('/instagram', passportAuth_middleware_1.authenticateWithInstagram);
+authRoute.get('/facebook/callback', instgramAuth_1.instagramPassport.authenticate('instagram', {
     session: false,
 }), (0, express_async_handler_1.default)(async (req, res) => {
     res.json({ data: req.user });

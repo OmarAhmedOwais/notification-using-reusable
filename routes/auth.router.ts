@@ -4,7 +4,7 @@ import { protectedMiddleware } from "../middlewares/protected.middleware";
 import { googlePassport} from '../utils/googleAuth';
 import { facebookPassport } from '../utils/facebookAuth';
 import { twitterPassport } from '../utils/twitterAuth';
-import { authenticateWithGoogle,authenticateWithFacebook,authenticateWithTwitter } from '../middlewares/passportAuth.middleware';
+import { authenticateWithGoogle,authenticateWithFacebook,authenticateWithTwitter, authenticateWithInstagram } from '../middlewares/passportAuth.middleware';
 import { Request, Response } from "express";
 
 import {
@@ -27,6 +27,7 @@ import {
   resetPassword,
 } from "../controllers/auth.controller";
 import expressAsyncHandler from "express-async-handler";
+import { instagramPassport } from "../utils/instgramAuth";
 const authRoute = Router();
 
 authRoute
@@ -81,6 +82,20 @@ authRoute.get('/facebook', authenticateWithFacebook);
 authRoute.get(
   '/facebook/callback',
   facebookPassport.authenticate('facebook',
+    {
+      session: false,
+
+    }),
+  expressAsyncHandler(async (req: Request, res: Response) => {
+    res.json({ data: req.user });
+  })
+);
+
+authRoute.get('/instagram', authenticateWithInstagram);
+
+authRoute.get(
+  '/facebook/callback',
+  instagramPassport.authenticate('instagram',
     {
       session: false,
 

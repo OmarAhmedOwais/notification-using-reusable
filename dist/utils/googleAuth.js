@@ -24,7 +24,7 @@ exports.googlePassport = passport_1.default.use(new passport_google_oauth20_1.St
                 ar: 'فشل المصادقة من جوجل'
             }, http_status_codes_1.StatusCodes.BAD_REQUEST);
         }
-        const existingUser = await user_model_1.User.findOne({ email: (_b = (_a = profile.emails) === null || _a === void 0 ? void 0 : _a[0]) === null || _b === void 0 ? void 0 : _b.value });
+        const existingUser = await user_model_1.User.findOne({ email: (_b = (_a = profile.emails) === null || _a === void 0 ? void 0 : _a[0]) === null || _b === void 0 ? void 0 : _b.value }).select('-password');
         if (existingUser) {
             console.log('user is: ', existingUser);
             const token = existingUser.createToken();

@@ -20,14 +20,14 @@ export const googlePassport = passport.use(
             ar: 'فشل المصادقة من جوجل'
           }, StatusCodes.BAD_REQUEST);
         }
-        const existingUser = await User.findOne({ email: profile.emails?.[0]?.value });
+        const existingUser = await User.findOne({ email: profile.emails?.[0]?.value }).select('-password');
 
         if (existingUser) {
           console.log('user is: ', existingUser)
           const token = existingUser.createToken();
           return done(null,{user: existingUser, token});
         }
-
+        
         // User doesn't exist, create a new user
         const newUser = new User({
           email: profile.emails?.[0]?.value,

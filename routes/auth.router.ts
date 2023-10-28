@@ -94,7 +94,7 @@ authRoute.get(
 authRoute.get('/instagram', authenticateWithInstagram);
 
 authRoute.get(
-  '/facebook/callback',
+  '/instagram/callback',
   instagramPassport.authenticate('instagram',
     {
       session: false,

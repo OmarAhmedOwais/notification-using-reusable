@@ -6,7 +6,6 @@ declare namespace NodeJS {
     NODE_ENV: "dev" | "prod";
     BCRYPT_SALT: number;
     APP_URL: string;
-    APP_URL_Render: string;
     JWT_SECRET: string;
     JWT_EXPIRE: string;
     JWT_EXPIRE_GUEST: string;

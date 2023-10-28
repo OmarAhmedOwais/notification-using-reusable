@@ -27,7 +27,7 @@ exports.createNotification = (0, express_async_handler_1.default)(async (req, re
         const notification = await notification_model_1.Notification.create({ title, message, sender, receiver });
         // Access the WebSocket server from the request object
         // Broadcast the notification to all connected clients
-        index_1.io.emit('createNotification', notification);
+        index_1.io.to(receiver).emit('createNotification', notification);
         res.status(201).json(notification);
     }
     catch (error) {

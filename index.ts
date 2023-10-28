@@ -70,7 +70,7 @@ app.all(
 
 const PORT = process.env.PORT || 3000;
 // app.listen(PORT, () => {
-//   console.log(`Server running:  ${process.env.APP_URL_Render}`.green.bold);
+//   console.log(`Server running:  ${process.env.APP_URL}`.green.bold);
 // });
 
 
@@ -99,6 +99,10 @@ app.set('socketio', io);
 // Listen for incoming connections
 io.on('connection', (socket: Socket) => {
   console.log('A client connected');
+  socket.on('joinRoom', (room) => {
+    socket.join(room);
+    console.log(`A client joined room: ${room}`);
+  });
   socket.on('mark-as-read', async (notificationId) => {
     // Update the notification by its ID to set 'read' to true
     const notification = await markNotificationAsReadSocket(notificationId);
@@ -110,5 +114,5 @@ io.on('connection', (socket: Socket) => {
 });
 // Start the HTTP server
 server.listen(PORT, () => {
-  console.log(`Server running:  ${process.env.APP_URL_Render}`.green.bold);
+  console.log(`Server running:  ${process.env.APP_URL}`.green.bold);
 });

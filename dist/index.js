@@ -53,7 +53,7 @@ app.all("*", (req, res, next) => {
 // }));
 const PORT = process.env.PORT || 3000;
 // app.listen(PORT, () => {
-//   console.log(`Server running:  ${process.env.APP_URL_Render}`.green.bold);
+//   console.log(`Server running:  ${process.env.APP_URL}`.green.bold);
 // });
 ///
 // Passport
@@ -79,6 +79,10 @@ app.set('socketio', exports.io);
 // Listen for incoming connections
 exports.io.on('connection', (socket) => {
     console.log('A client connected');
+    socket.on('joinRoom', (room) => {
+        socket.join(room);
+        console.log(`A client joined room: ${room}`);
+    });
     socket.on('mark-as-read', async (notificationId) => {
         // Update the notification by its ID to set 'read' to true
         const notification = await (0, notification_controller_1.markNotificationAsReadSocket)(notificationId);
@@ -90,5 +94,5 @@ exports.io.on('connection', (socket) => {
 });
 // Start the HTTP server
 server.listen(PORT, () => {
-    console.log(`Server running:  ${process.env.APP_URL_Render}`.green.bold);
+    console.log(`Server running:  ${process.env.APP_URL}`.green.bold);
 });

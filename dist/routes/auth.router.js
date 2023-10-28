@@ -8,8 +8,8 @@ const validation_middleware_1 = require("../middlewares/validation.middleware");
 const protected_middleware_1 = require("../middlewares/protected.middleware");
 const googleAuth_1 = require("../utils/googleAuth");
 const facebookAuth_1 = require("../utils/facebookAuth");
+const twitterAuth_1 = require("../utils/twitterAuth");
 const passportAuth_middleware_1 = require("../middlewares/passportAuth.middleware");
-const passport_1 = __importDefault(require("passport"));
 const auth_validator_1 = require("../validations/auth.validator");
 const auth_controller_1 = require("../controllers/auth.controller");
 const express_async_handler_1 = __importDefault(require("express-async-handler"));
@@ -50,10 +50,8 @@ authRoute.get('/facebook/callback', facebookAuth_1.facebookPassport.authenticate
 }), (0, express_async_handler_1.default)(async (req, res) => {
     res.json({ data: req.user });
 }));
-authRoute.get('/twitter', passport_1.default.authenticate('twitter'));
-authRoute.get('/twitter/callback', passport_1.default.authenticate('twitter', {
-    session: false,
-}), (0, express_async_handler_1.default)(async (req, res) => {
+authRoute.get('/twitter', passportAuth_middleware_1.authenticateWithTwitter);
+authRoute.get('/twitter/callback', twitterAuth_1.twitterPassport.authenticate('twitter'), (0, express_async_handler_1.default)(async (req, res) => {
     res.json({ data: req.user });
 }));
 exports.default = authRoute;

@@ -6,7 +6,6 @@ import { facebookPassport } from '../utils/facebookAuth';
 import { twitterPassport } from '../utils/twitterAuth';
 import { authenticateWithGoogle,authenticateWithFacebook,authenticateWithTwitter } from '../middlewares/passportAuth.middleware';
 import { Request, Response } from "express";
-import passport from "passport";
 
 import {
   userRegisterValidation,
@@ -91,15 +90,11 @@ authRoute.get(
   })
 );
 
-authRoute.get('/twitter', passport.authenticate('twitter'));
+authRoute.get('/twitter', authenticateWithTwitter);
 
 authRoute.get(
   '/twitter/callback',
-  passport.authenticate('twitter',
-    {
-      session: false,
-
-    }),
+  twitterPassport.authenticate('twitter'),
   expressAsyncHandler(async (req: Request, res: Response) => {
     res.json({ data: req.user });
   })

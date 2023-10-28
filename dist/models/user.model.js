@@ -120,7 +120,7 @@ userSchema.pre("save", function (next) {
     next();
 });
 userSchema.virtual("imageUrl").get(function () {
-    return `${process.env.APP_URL_Render}/uploads/${this.image}`;
+    return `${process.env.APP_URL}/uploads/${this.image}`;
 });
 userSchema.methods.comparePassword = function (password) {
     if (!password)

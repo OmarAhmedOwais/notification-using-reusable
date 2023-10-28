@@ -8,7 +8,7 @@ import ApiError from "../utils/ApiError";
 import { sendSMS, verifyCaller } from "../utils/twilioSendSMS";
 // import { sendSMS } from "../utils/sendSMS";
 import { sendEmail } from "../utils/sendEmail";
-import { log } from "console";
+
 
 interface RegisterBodyInterface {
   registrationType: string;

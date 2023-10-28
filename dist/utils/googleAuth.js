@@ -14,7 +14,7 @@ dotenv_1.default.config({ path: "../config/config.env" });
 exports.googlePassport = passport_1.default.use(new passport_google_oauth20_1.Strategy({
     clientID: `486588801461-q2pp5v2ri0ookfuonlafv46fnq552q5s.apps.googleusercontent.com`,
     clientSecret: `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`,
-    callbackURL: `${process.env.APP_URL_Render}/api/v1/auth/google/callback`,
+    callbackURL: `${process.env.APP_URL}/api/v1/auth/google/callback`,
 }, async (accessToken, refreshToken, profile, done) => {
     var _a, _b, _c, _d, _e, _f;
     try {

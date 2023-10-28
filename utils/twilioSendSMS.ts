@@ -1,4 +1,3 @@
-import readline from 'readline';
 import dotenv from 'dotenv';
 import twilio from 'twilio';
 

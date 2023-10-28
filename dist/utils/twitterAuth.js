@@ -16,7 +16,7 @@ exports.twitterPassport = passport_1.default.use(new passport_twitter_1.Strategy
     consumerSecret: `yYvtfgozfGd03TFPpUPI44IsCo1nOg4WGziIZ0GHXOfPpBjBzD`,
     //accessToken: '1716813998698659840-nxausr07bUgEpiVtfivEwsosQpIgXk',
     //accessTokenSecret: 'vCJi4VgEX9CFVl9z4Gnh5A2foURWol1X7ADS35rgr1zL7',
-    callbackURL: `${process.env.APP_URL_Render}/api/v1/auth/twitter/callback`,
+    callbackURL: `${process.env.APP_URL}/api/v1/auth/twitter/callback`,
 }, async (token, tokenSecret, profile, done) => {
     var _a, _b, _c, _d, _e, _f;
     try {

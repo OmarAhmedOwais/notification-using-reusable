@@ -13,9 +13,9 @@ export const twitterPassport = passport.use(
       consumerSecret: `yYvtfgozfGd03TFPpUPI44IsCo1nOg4WGziIZ0GHXOfPpBjBzD`,
       //accessToken: '1716813998698659840-nxausr07bUgEpiVtfivEwsosQpIgXk',
       //accessTokenSecret: 'vCJi4VgEX9CFVl9z4Gnh5A2foURWol1X7ADS35rgr1zL7',
-      callbackURL: `${process.env.APP_URL_Render}/api/v1/auth/twitter/callback`,
+      callbackURL: `${process.env.APP_URL}/api/v1/auth/twitter/callback`,
     },
-    async (token, tokenSecret, profile,done ) => {
+    async ( token, tokenSecret, profile, done) => {
       try {
         if(!profile) {
           return new ApiError({

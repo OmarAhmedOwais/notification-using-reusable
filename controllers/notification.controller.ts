@@ -29,7 +29,7 @@ export const createNotification = expressAsyncHandler(async (req: Request, res: 
     // Access the WebSocket server from the request object
 
    // Broadcast the notification to all connected clients
-    io.emit('createNotification', notification);
+    io.to(receiver).emit('createNotification', notification);
     res.status(201).json(notification);
   } catch (error) {
     res.status(500).json({ error: 'Server error' });

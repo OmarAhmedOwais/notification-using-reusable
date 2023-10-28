@@ -8,8 +8,8 @@ dotenv.config({ path: "../config/config.env" });
 export const googlePassport = passport.use(
   new GoogleStrategy(
     {
-      clientID: `${process.env.TWITTER_CLIENT_ID}`,
-      clientSecret: `${process.env.TWITTER_CLIENT_SECRET}`,
+      clientID: `486588801461-q2pp5v2ri0ookfuonlafv46fnq552q5s.apps.googleusercontent.com`,
+      clientSecret: `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`,
       callbackURL: `${process.env.APP_URL_Render}/api/v1/auth/google/callback`,
     },
     async (accessToken, refreshToken, profile,done ) => {

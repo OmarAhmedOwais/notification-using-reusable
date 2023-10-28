@@ -9,11 +9,13 @@ dotenv.config({ path: "../config/config.env" });
 export const twitterPassport = passport.use(
   new TwitterStrategy(
     {
-      consumerKey: `${process.env.TWITTER_CONSUMER_KEY}`,
-      consumerSecret: `${process.env.TWITTER_CONSUMER_SECRET}`,
+      consumerKey: `0F7UEYXsDJmGnbf3R5ZAQMy9G`,
+      consumerSecret: `yYvtfgozfGd03TFPpUPI44IsCo1nOg4WGziIZ0GHXOfPpBjBzD`,
+      //accessToken: '1716813998698659840-nxausr07bUgEpiVtfivEwsosQpIgXk',
+      //accessTokenSecret: 'vCJi4VgEX9CFVl9z4Gnh5A2foURWol1X7ADS35rgr1zL7',
       callbackURL: `${process.env.APP_URL_Render}/api/v1/auth/twitter/callback`,
     },
-    async (accessToken, refreshToken, profile,done ) => {
+    async (token, tokenSecret, profile,done ) => {
       try {
         if(!profile) {
           return new ApiError({

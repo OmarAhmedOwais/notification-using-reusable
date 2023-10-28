@@ -20,6 +20,7 @@ const notification_controller_1 = require("./controllers/notification.controller
 // Passport
 const passport_1 = __importDefault(require("passport"));
 //import cookieSession from 'cookie-session';
+//import session from 'express-session';
 const app = (0, express_1.default)();
 const NODE_ENV = process.env.NODE_ENV || "dev";
 if (NODE_ENV === "dev") {
@@ -43,6 +44,12 @@ app.all("*", (req, res, next) => {
 // app.use(cookieSession({
 //   maxAge: 24 * 60 * 60 * 1000,
 //   keys: ['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']
+// }));
+// // Configure express-session middleware
+// app.use(session({
+//   secret: 'your-secret-key', // Change this to a secure random string
+//   resave: false,
+//   saveUninitialized: true,
 // }));
 const PORT = process.env.PORT || 3000;
 // app.listen(PORT, () => {

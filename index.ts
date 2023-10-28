@@ -16,6 +16,7 @@ import { markNotificationAsReadSocket } from "./controllers/notification.control
 // Passport
 import passport from 'passport';
 //import cookieSession from 'cookie-session';
+//import session from 'express-session';
 
 
 const app = express();
@@ -58,6 +59,13 @@ app.all(
 // app.use(cookieSession({
 //   maxAge: 24 * 60 * 60 * 1000,
 //   keys: ['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']
+// }));
+
+// // Configure express-session middleware
+// app.use(session({
+//   secret: 'your-secret-key', // Change this to a secure random string
+//   resave: false,
+//   saveUninitialized: true,
 // }));
 
 const PORT = process.env.PORT || 3000;

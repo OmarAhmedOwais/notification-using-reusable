@@ -73,7 +73,7 @@ authRoute.get(
 
     }),
   expressAsyncHandler(async (req: Request, res: Response) => {
-    res.redirect(`http://localhost:8008?${{ data: req.user }}`);
+    res.json({ data: req.user });
   })
 );
 

@@ -8,8 +8,11 @@ import morgan from "morgan";
 import router from "./mount";
 
 import "colors";
+import { globalErrorMiddleware } from "./middlewares/globalError.middleware";
+import expressAsyncHandler from "express-async-handler";
 import ApiError from "./utils/ApiError";
 import { StatusCodes } from "http-status-codes";
+//import webhook from "./webhooks";
 import http from "http";
 import { Server, Socket } from "socket.io";
 import { markNotificationAsReadSocket } from "./controllers/notification.controller";
@@ -37,11 +40,12 @@ app.use(express.urlencoded({ extended: false }));
 
 // routes
 app.use("/api/v1", router);
+//app.use("/webhooks", webhook);
 
 // un handled routes (not found)
-app.all(
+app.use(
   "*",
-  (req, res, next) => {
+  expressAsyncHandler(async (req, res, next) => {
     next(
       new ApiError(
         {
@@ -51,8 +55,9 @@ app.all(
         StatusCodes.NOT_FOUND
       )
     );
-  }
+  })
 );
+app.use(globalErrorMiddleware);
 
 
 // set up session cookies

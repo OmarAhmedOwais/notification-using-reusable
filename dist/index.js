@@ -12,8 +12,11 @@ const db_connection_1 = __importDefault(require("./config/db_connection"));
 const morgan_1 = __importDefault(require("morgan"));
 const mount_1 = __importDefault(require("./mount"));
 require("colors");
+const globalError_middleware_1 = require("./middlewares/globalError.middleware");
+const express_async_handler_1 = __importDefault(require("express-async-handler"));
 const ApiError_1 = __importDefault(require("./utils/ApiError"));
 const http_status_codes_1 = require("http-status-codes");
+//import webhook from "./webhooks";
 const http_1 = __importDefault(require("http"));
 const socket_io_1 = require("socket.io");
 const notification_controller_1 = require("./controllers/notification.controller");
@@ -33,13 +36,15 @@ app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: false }));
 // routes
 app.use("/api/v1", mount_1.default);
+//app.use("/webhooks", webhook);
 // un handled routes (not found)
-app.all("*", (req, res, next) => {
+app.use("*", (0, express_async_handler_1.default)(async (req, res, next) => {
     next(new ApiError_1.default({
         en: `this path ${req.originalUrl} not found`,
         ar: `هذا المسار ${req.originalUrl} غير موجود`,
     }, http_status_codes_1.StatusCodes.NOT_FOUND));
-});
+}));
+app.use(globalError_middleware_1.globalErrorMiddleware);
 // set up session cookies
 // app.use(cookieSession({
 //   maxAge: 24 * 60 * 60 * 1000,

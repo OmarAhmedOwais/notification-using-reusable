@@ -52,7 +52,7 @@ authRoute.get('/facebook/callback', facebookAuth_1.facebookPassport.authenticate
     res.json({ data: req.user });
 }));
 authRoute.get('/instagram', passportAuth_middleware_1.authenticateWithInstagram);
-authRoute.get('/facebook/callback', instgramAuth_1.instagramPassport.authenticate('instagram', {
+authRoute.get('/instagram/callback', instgramAuth_1.instagramPassport.authenticate('instagram', {
     session: false,
 }), (0, express_async_handler_1.default)(async (req, res) => {
     res.json({ data: req.user });

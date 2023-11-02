@@ -26,6 +26,7 @@
     "express-session": "^1.17.3",
     "express-ws": "^5.0.2",
     "from": "^0.1.7",
+    "html-pdf": "^3.0.1",
     "http-status-codes": "^2.2.0",
     "import": "^0.0.6",
     "joi": "^17.9.2",

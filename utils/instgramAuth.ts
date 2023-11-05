@@ -9,8 +9,8 @@ dotenv.config({ path: "../config/config.env" });
 export const instagramPassport = passport.use(
   new InstagramStrategy(
     {
-      clientID: `${process.env.INSTAGRAM_APP_ID}`,
-      clientSecret: `${process.env.INSTAGRAM_APP_SECRET}`,
+      clientID: `${process.env.FACEBOOK_APP_ID}`,
+      clientSecret: `${process.env.FACEBOOK_APP_SECRET}`,
       callbackURL: `${process.env.APP_URL}/api/v1/auth/instagram/callback`,
     },
     async (accessToken, refreshToken, profile,done ) => {

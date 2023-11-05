@@ -9,8 +9,8 @@ dotenv.config({ path: "../config/config.env" });
 export const facebookPassport = passport.use(
   new FacebookStrategy(
     {
-      clientID: `${process.env.FACEBOOK_CLIENT_ID}`,
-      clientSecret: `${process.env.FACEBOOK_CLIENT_SECRET}`,
+      clientID: `${process.env.FACEBOOK_APP_ID}`,
+      clientSecret: `${process.env.FACEBOOK_APP_SECRET}`,
       callbackURL: `${process.env.APP_URL}/api/v1/auth/facebook/callback`,
     },
     async (accessToken, refreshToken, profile,done ) => {

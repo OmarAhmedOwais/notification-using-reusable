@@ -11,7 +11,7 @@ export const instagramPassport = passport.use(
     {
       clientID: `${process.env.INSTAGRAM_APP_ID}`,
       clientSecret: `${process.env.INSTAGRAM_APP_SECRET}`,
-      callbackURL: `http://localhost:8080/auth/instagram/callback`,
+      callbackURL: `https://localhost:8080/auth/instagram/callback`,
     },
     async (accessToken, refreshToken, profile,done ) => {
       try {

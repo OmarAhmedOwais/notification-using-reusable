@@ -14,7 +14,7 @@ dotenv_1.default.config({ path: "../config/config.env" });
 exports.instagramPassport = passport_1.default.use(new passport_instagram_1.Strategy({
     clientID: `${process.env.INSTAGRAM_APP_ID}`,
     clientSecret: `${process.env.INSTAGRAM_APP_SECRET}`,
-    callbackURL: `https://localhost:8080/auth/instagram/callback`,
+    callbackURL: `${process.env.APP_URL}/api/v1/auth/instagram/callback`,
 }, async (accessToken, refreshToken, profile, done) => {
     var _a, _b, _c, _d, _e, _f;
     try {

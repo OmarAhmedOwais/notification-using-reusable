@@ -26,3 +26,18 @@ footer {
     bottom: 0;
     width: 100%;
 }
+
+.fb-login-button {
+    background-color: #3b5998;
+    color: white;
+    border: 0px transparent;
+    border-radius: 4px;
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .fb-login-button:hover {
+    background-color: #3b5998;
+    opacity: 0.6;
+  }
+  

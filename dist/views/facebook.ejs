@@ -2,6 +2,7 @@
 <html>
 <head>
 <title>Facebook Login JavaScript Example</title>
+<link rel="stylesheet" href="/styles/style.css">
 <meta charset="UTF-8">
 </head>
 <body>
@@ -54,8 +55,8 @@
 
 <!-- The JS SDK Login Button -->
 
-<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-</fb:login-button>
+<button class="fb-login-button" scope="public_profile,email" onlogin="checkLoginState();">Login with Facebook</button>
+
 
 <div id="status">
 </div>

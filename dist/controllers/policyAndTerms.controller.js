@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getTerms = exports.getPolicy = void 0;
+exports.getIndex = exports.getTerms = exports.getPolicy = void 0;
 const getPolicy = async (req, res) => {
     res.render('policyAndPrivacy');
 };
@@ -9,3 +9,7 @@ const getTerms = async (req, res) => {
     res.render('terms');
 };
 exports.getTerms = getTerms;
+const getIndex = async (req, res) => {
+    res.render('index');
+};
+exports.getIndex = getIndex;

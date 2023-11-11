@@ -6,6 +6,6 @@ import { getIndex} from '../controllers/policyAndTerms.controller';
 const indexRoute = Router();
 
 indexRoute.get('/', getIndex);
-
+indexRoute.get('/facebook', getIndex);
 
 export default indexRoute;

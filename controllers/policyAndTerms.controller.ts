@@ -14,3 +14,6 @@ export const getTerms = async (req: Request, res: Response) => {
   export const getIndex = async (req: Request, res: Response) => {
     res.render('index');
   };
+  export const getFacebook = async (req: Request, res: Response) => {
+    res.render('facebook');
+  };

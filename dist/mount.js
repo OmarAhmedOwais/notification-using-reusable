@@ -7,6 +7,7 @@ const express_1 = require("express");
 const auth_router_1 = __importDefault(require("./routes/auth.router"));
 const user_router_1 = __importDefault(require("./routes/user.router"));
 const notification_router_1 = __importDefault(require("./routes/notification.router"));
+const policyAndTerms_router_1 = __importDefault(require("./routes/policyAndTerms.router"));
 const router = (0, express_1.Router)();
 /*
 allowedTo(
@@ -21,4 +22,5 @@ allowedTo(
 router.use("/users", user_router_1.default);
 router.use("/auth", auth_router_1.default);
 router.use("/notification", notification_router_1.default);
+router.use("/policyAndTerms", policyAndTerms_router_1.default);
 exports.default = router;

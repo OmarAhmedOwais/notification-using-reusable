@@ -22,6 +22,7 @@ const socket_io_1 = require("socket.io");
 const notification_controller_1 = require("./controllers/notification.controller");
 // Passport
 const passport_1 = __importDefault(require("passport"));
+const path_1 = __importDefault(require("path"));
 //import cookieSession from 'cookie-session';
 //import session from 'express-session';
 const app = (0, express_1.default)();
@@ -34,6 +35,10 @@ if (NODE_ENV === "dev") {
 app.use((0, cors_1.default)());
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: false }));
+app.use(path_1.default.join(__dirname, 'public'), express_1.default.static('public'));
+app.use(path_1.default.join(__dirname, 'views'), express_1.default.static('views'));
+app.set('view engine', 'ejs');
+app.set('views', path_1.default.join(__dirname, 'views'));
 // routes
 app.use("/api/v1", mount_1.default);
 //app.use("/webhooks", webhook);

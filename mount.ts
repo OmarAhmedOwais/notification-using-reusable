@@ -25,7 +25,7 @@ router.use("/users", userRouter);
 router.use("/auth", authRouter);
 router.use("/notification", notificationRouter);
 router.use("/policyAndTerms",policyAndTermsRouter)
-router.use("",indexRoute)
+router.use("/",indexRoute)
 
 
 

@@ -10,3 +10,7 @@ export const getPolicy = async (req: Request, res: Response) => {
 export const getTerms = async (req: Request, res: Response) => {
     res.render('terms');
   };
+
+  export const getIndex = async (req: Request, res: Response) => {
+    res.render('index');
+  };

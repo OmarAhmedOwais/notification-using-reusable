@@ -8,6 +8,7 @@ import { IQuery } from "../interfaces/factory/factory.interface";
 import { ApiFeatures } from "../utils/ApiFeatures";
 import bcrypt from "bcrypt";
 import { Request, Response, NextFunction } from "express";
+import { getCountryFromIP } from "../utils/getCountryFromIp";
 
 // @desc     Get All Users
 // @route    GET/api/v1/users
@@ -338,11 +339,29 @@ export const deleteUserById = expressAsyncHandler(
 // @access   Private (User/Admins)
 export const getLoggedUser = expressAsyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    const user = await User.findOne({ _id: (req.user as any)!._id });
-
+    const user = await User.findOne({ _id: (req.user! as any)._id }).populate("pointsMarketer");
+    const clientIP =
+    (req.headers['x-forwarded-for'] as string) || (req.socket.remoteAddress as string);
+  
+   console.log('Client IP:', clientIP);
+   const clientCountry = getCountryFromIP(clientIP);
+   if (clientCountry) {
+    console.log('Client Country:', clientCountry);
+  } else {
+    console.log('Country not found.');
+  }
+    if (!user) {
+      return next(
+        new ApiError(
+          { en: "User not found", ar: "المستخدم غير موجود" },
+          StatusCodes.NOT_FOUND
+        )
+      );
+    }
     res.status(StatusCodes.OK).json({
       status: Status.SUCCESS,
       data: user,
+      clientCountry,
       success_en: "User found successfully",
       success_ar: "تم العثور على المستخدم بنجاح",
     });

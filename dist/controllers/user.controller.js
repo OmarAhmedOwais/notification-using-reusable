@@ -23,6 +23,7 @@ const http_status_codes_1 = require("http-status-codes");
 const status_enum_1 = require("../interfaces/status/status.enum");
 const ApiFeatures_1 = require("../utils/ApiFeatures");
 const bcrypt_1 = __importDefault(require("bcrypt"));
+const getCountryFromIp_1 = require("../utils/getCountryFromIp");
 // @desc     Get All Users
 // @route    GET/api/v1/users
 // @access   Private (Root) TODO: add the rest of the roles
@@ -248,10 +249,24 @@ exports.deleteUserById = (0, express_async_handler_1.default)(async (req, res, n
 // @route    GET/api/v1/users/me
 // @access   Private (User/Admins)
 exports.getLoggedUser = (0, express_async_handler_1.default)(async (req, res, next) => {
-    const user = await user_model_1.User.findOne({ _id: req.user._id });
+    const user = await user_model_1.User.findOne({ _id: req.user._id }).populate("pointsMarketer");
+    const clientIP = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+    console.log('Client IP:', clientIP);
+    const clientCountry = (0, getCountryFromIp_1.getCountryFromIP)(clientIP);
+    if (clientCountry) {
+        console.log('Client Country:', clientCountry);
+    }
+    else {
+        console.log('Country not found.');
+    }
+    if (!user) {
+        return next(new ApiError_1.default({ en: "User not found", ar: "المستخدم غير موجود" }, http_status_codes_1.StatusCodes.NOT_FOUND));
+    }
     res.status(http_status_codes_1.StatusCodes.OK).json({
         status: status_enum_1.Status.SUCCESS,
-        data: user,
+        ip: " " + clientIP + " ",
+        clientCountry: clientCountry || clientIP || "not found",
+        //data: user,
         success_en: "User found successfully",
         success_ar: "تم العثور على المستخدم بنجاح",
     });

@@ -342,11 +342,13 @@ export const getLoggedUser = expressAsyncHandler(
     const user = await User.findOne({ _id: (req.user! as any)._id });
     const clientIP =
     (req.headers['x-forwarded-for'] as string) || (req.socket.remoteAddress as string);
-   console.log('Client IP:', clientIP);
-   const clientCountry = geoip.lookup(clientIP);
+    console.log('Client IP:', clientIP);
+    const ip =clientIP.split(',')[0];
+    console.log('Client Public IP:', ip);
+   const clientCountry = geoip.lookup(ip);
    //const clientCountry = getCountryFromIP(clientIP);
    if (clientCountry) {
-    console.log('Client Country:', clientCountry);
+    console.log('Client Country:', clientCountry.country);
   } else {
     console.log('Country not found.');
   }
@@ -361,7 +363,7 @@ export const getLoggedUser = expressAsyncHandler(
     res.status(StatusCodes.OK).json({
       status: Status.SUCCESS,
       ip:" "+ clientIP + " ",
-      clientCountry:clientCountry||"not found",
+      clientCountry:clientCountry?.country ||"not found",
       //data: user,
       success_en: "User found successfully",
       success_ar: "تم العثور على المستخدم بنجاح",

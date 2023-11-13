@@ -23,7 +23,7 @@ const http_status_codes_1 = require("http-status-codes");
 const status_enum_1 = require("../interfaces/status/status.enum");
 const ApiFeatures_1 = require("../utils/ApiFeatures");
 const bcrypt_1 = __importDefault(require("bcrypt"));
-const getCountryFromIp_1 = require("../utils/getCountryFromIp");
+const geoip_lite_1 = __importDefault(require("geoip-lite"));
 // @desc     Get All Users
 // @route    GET/api/v1/users
 // @access   Private (Root) TODO: add the rest of the roles
@@ -252,7 +252,8 @@ exports.getLoggedUser = (0, express_async_handler_1.default)(async (req, res, ne
     const user = await user_model_1.User.findOne({ _id: req.user._id });
     const clientIP = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
     console.log('Client IP:', clientIP);
-    const clientCountry = (0, getCountryFromIp_1.getCountryFromIP)(clientIP);
+    const clientCountry = geoip_lite_1.default.lookup(clientIP);
+    //const clientCountry = getCountryFromIP(clientIP);
     if (clientCountry) {
         console.log('Client Country:', clientCountry);
     }
@@ -265,7 +266,7 @@ exports.getLoggedUser = (0, express_async_handler_1.default)(async (req, res, ne
     res.status(http_status_codes_1.StatusCodes.OK).json({
         status: status_enum_1.Status.SUCCESS,
         ip: " " + clientIP + " ",
-        clientCountry: clientCountry || clientIP || "not found",
+        clientCountry: clientCountry || "not found",
         //data: user,
         success_en: "User found successfully",
         success_ar: "تم العثور على المستخدم بنجاح",

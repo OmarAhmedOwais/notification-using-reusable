@@ -9,7 +9,7 @@ import { ApiFeatures } from "../utils/ApiFeatures";
 import bcrypt from "bcrypt";
 import { Request, Response, NextFunction } from "express";
 import { getCountryFromIP } from "../utils/getCountryFromIp";
-
+import geoip from 'geoip-lite';
 // @desc     Get All Users
 // @route    GET/api/v1/users
 // @access   Private (Root) TODO: add the rest of the roles
@@ -342,9 +342,9 @@ export const getLoggedUser = expressAsyncHandler(
     const user = await User.findOne({ _id: (req.user! as any)._id });
     const clientIP =
     (req.headers['x-forwarded-for'] as string) || (req.socket.remoteAddress as string);
-   
    console.log('Client IP:', clientIP);
-   const clientCountry = getCountryFromIP(clientIP);
+   const clientCountry = geoip.lookup(clientIP);
+   //const clientCountry = getCountryFromIP(clientIP);
    if (clientCountry) {
     console.log('Client Country:', clientCountry);
   } else {
@@ -361,7 +361,7 @@ export const getLoggedUser = expressAsyncHandler(
     res.status(StatusCodes.OK).json({
       status: Status.SUCCESS,
       ip:" "+ clientIP + " ",
-      clientCountry:clientCountry||clientIP||"not found",
+      clientCountry:clientCountry||"not found",
       //data: user,
       success_en: "User found successfully",
       success_ar: "تم العثور على المستخدم بنجاح",

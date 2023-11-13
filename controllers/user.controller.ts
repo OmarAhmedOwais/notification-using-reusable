@@ -361,9 +361,9 @@ export const getLoggedUser = expressAsyncHandler(
     }
     res.status(StatusCodes.OK).json({
       status: Status.SUCCESS,
-      data: user,
       ip:" "+ clientIP + " ",
       clientCountry:clientCountry||clientIP||"not found",
+      data: user,
       success_en: "User found successfully",
       success_ar: "تم العثور على المستخدم بنجاح",
     });

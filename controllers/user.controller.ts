@@ -339,7 +339,7 @@ export const deleteUserById = expressAsyncHandler(
 // @access   Private (User/Admins)
 export const getLoggedUser = expressAsyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    const user = await User.findOne({ _id: (req.user! as any)._id }).populate("pointsMarketer");
+    const user = await User.findOne({ _id: (req.user! as any)._id });
     const clientIP =
     (req.headers['x-forwarded-for'] as string) || (req.socket.remoteAddress as string);
    

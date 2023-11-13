@@ -249,7 +249,7 @@ exports.deleteUserById = (0, express_async_handler_1.default)(async (req, res, n
 // @route    GET/api/v1/users/me
 // @access   Private (User/Admins)
 exports.getLoggedUser = (0, express_async_handler_1.default)(async (req, res, next) => {
-    const user = await user_model_1.User.findOne({ _id: req.user._id }).populate("pointsMarketer");
+    const user = await user_model_1.User.findOne({ _id: req.user._id });
     const clientIP = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
     console.log('Client IP:', clientIP);
     const clientCountry = (0, getCountryFromIp_1.getCountryFromIP)(clientIP);

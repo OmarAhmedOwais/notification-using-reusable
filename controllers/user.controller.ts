@@ -341,7 +341,8 @@ export const getLoggedUser = expressAsyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const user = await User.findOne({ _id: (req.user! as any)._id }).populate("pointsMarketer");
     const clientIP =
-    (req.headers['x-forwarded-for'] as string) || (req.socket.remoteAddress as string);
+    (req.headers['x-forwarded-for'] as string) || (req.socket.remoteAddress as string)|| 
+    (req.connection.remoteAddress as string);
   
    console.log('Client IP:', clientIP);
    const clientCountry = getCountryFromIP(clientIP);
@@ -361,6 +362,7 @@ export const getLoggedUser = expressAsyncHandler(
     res.status(StatusCodes.OK).json({
       status: Status.SUCCESS,
       data: user,
+      ip:" "+ clientIP + " ",
       clientCountry:clientCountry||clientIP||"not found",
       success_en: "User found successfully",
       success_ar: "تم العثور على المستخدم بنجاح",

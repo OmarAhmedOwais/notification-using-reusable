@@ -3,9 +3,9 @@
 import { Router } from "express";
 import { getFacebook, getIndex} from '../controllers/policyAndTerms.controller';
 
-const indexRoute = Router();
+const indexRouter = Router();
 
-indexRoute.get('/', getIndex);
-indexRoute.get('/facebook', getFacebook);
+indexRouter.get('/', getIndex);
+indexRouter.get('/facebook', getFacebook);
 
-export default indexRoute;
+export default indexRouter;

@@ -345,7 +345,7 @@ export const getLoggedUser = expressAsyncHandler(
     console.log('Client IP:', clientIP);
     const ip =clientIP.split(',')[0];
     console.log('Client Public IP:', ip);
-   const clientCountry = geoip.lookup(ip);
+   const clientCountry = geoip.lookup("197.39.108.190");
    //const clientCountry = getCountryFromIP(clientIP);
    if (clientCountry) {
     console.log('Client Country:', clientCountry.country);
@@ -359,6 +359,7 @@ export const getLoggedUser = expressAsyncHandler(
           StatusCodes.NOT_FOUND
         )
       );
+      
     }
     res.status(StatusCodes.OK).json({
       status: Status.SUCCESS,

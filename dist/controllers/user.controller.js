@@ -254,7 +254,7 @@ exports.getLoggedUser = (0, express_async_handler_1.default)(async (req, res, ne
     console.log('Client IP:', clientIP);
     const ip = clientIP.split(',')[0];
     console.log('Client Public IP:', ip);
-    const clientCountry = geoip_lite_1.default.lookup(ip);
+    const clientCountry = geoip_lite_1.default.lookup("197.39.108.190");
     //const clientCountry = getCountryFromIP(clientIP);
     if (clientCountry) {
         console.log('Client Country:', clientCountry.country);

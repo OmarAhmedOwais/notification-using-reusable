@@ -6,7 +6,8 @@ import userRouter from "./routes/user.router";
 
 import notificationRouter from "./routes/notification.router";
 import policyAndTermsRouter from "./routes/policyAndTerms.router";
-import indexRoute from "./routes/index.router";
+import indexRouter from "./routes/index.router";
+import changeCurrencyRouter from "./routes/changeCurrency.router";
 
 const router = Router();
 
@@ -25,7 +26,8 @@ router.use("/users", userRouter);
 router.use("/auth", authRouter);
 router.use("/notification", notificationRouter);
 router.use("/policyAndTerms",policyAndTermsRouter)
-router.use("/",indexRoute)
+router.use("/",indexRouter)
+router.use("/changeCurrency",changeCurrencyRouter)
 
 
 

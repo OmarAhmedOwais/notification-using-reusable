@@ -4,7 +4,7 @@ import { protectedMiddleware } from "../middlewares/protected.middleware";
 import { googlePassport} from '../utils/googleAuth';
 import { facebookPassport } from '../utils/facebookAuth';
 import { twitterPassport } from '../utils/twitterAuth';
-import { authenticateWithGoogle,authenticateWithFacebook,authenticateWithTwitter, authenticateWithInstagram } from '../middlewares/passportAuth.middleware';
+import { authenticateWithGoogle,authenticateWithFacebook,authenticateWithTwitter, authenticateWithInstagram, authenticateWithSnapchat } from '../middlewares/passportAuth.middleware';
 import { Request, Response } from "express";
 
 import {
@@ -28,6 +28,7 @@ import {
 } from "../controllers/auth.controller";
 import expressAsyncHandler from "express-async-handler";
 import { instagramPassport } from "../utils/instgramAuth";
+import { snapchatPassport } from "../utils/snapchatAuth";
 const authRoute = Router();
 
 authRoute
@@ -110,6 +111,20 @@ authRoute.get('/twitter', authenticateWithTwitter);
 authRoute.get(
   '/twitter/callback',
   twitterPassport.authenticate('twitter'),
+  expressAsyncHandler(async (req: Request, res: Response) => {
+    res.json({ data: req.user });
+  })
+);
+
+authRoute.get('/snapchat', authenticateWithSnapchat);
+
+authRoute.get(
+  '/snapchat/callback',
+  snapchatPassport.authenticate('snapchat',
+    {
+      session: false,
+
+    }),
   expressAsyncHandler(async (req: Request, res: Response) => {
     res.json({ data: req.user });
   })

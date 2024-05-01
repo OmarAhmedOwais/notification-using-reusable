@@ -4,7 +4,7 @@ import { protectedMiddleware } from "../middlewares/protected.middleware";
 import { googlePassport} from '../utils/googleAuth';
 import { facebookPassport } from '../utils/facebookAuth';
 import { twitterPassport } from '../utils/twitterAuth';
-import { authenticateWithGoogle,authenticateWithFacebook,authenticateWithTwitter, authenticateWithInstagram, authenticateWithSnapchat } from '../middlewares/passportAuth.middleware';
+import { authenticateWithGoogle,authenticateWithFacebook,authenticateWithTwitter, authenticateWithInstagram, authenticateWithSnapchat, authenticateWithTiktok } from '../middlewares/passportAuth.middleware';
 import { Request, Response } from "express";
 
 import {
@@ -125,6 +125,16 @@ authRoute.get(
       session: false,
 
     }),
+  expressAsyncHandler(async (req: Request, res: Response) => {
+    res.json({ data: req.user });
+  })
+);
+
+authRoute.get('/tiktok', authenticateWithTiktok);
+
+authRoute.get(
+  '/tiktok/callback',
+  authenticateWithTiktok,
   expressAsyncHandler(async (req: Request, res: Response) => {
     res.json({ data: req.user });
   })

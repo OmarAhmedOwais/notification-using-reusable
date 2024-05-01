@@ -1,5 +1,5 @@
 import passport from 'passport';
-import { Strategy as InstagramStrategy } from 'passport-instagram';
+import { Strategy as InstagramStrategy, StrategyOptionBase } from 'passport-instagram';
 import { StatusCodes } from 'http-status-codes';
 import ApiError from './ApiError';
 import { User} from '../models/user.model';
@@ -9,10 +9,10 @@ dotenv.config({ path: "../config/config.env" });
 export const instagramPassport = passport.use(
   new InstagramStrategy(
     {
-      clientID: `${process.env.INSTAGRAM_APP_ID}`,
+      clientID: `${process.env.INSTAGRAM_APP_ID}` as string,
       clientSecret: `${process.env.INSTAGRAM_APP_SECRET}`,
       callbackURL: `${process.env.APP_URL}/api/v1/auth/instagram/callback`,
-    },
+    } as StrategyOptionBase,
     async (accessToken, refreshToken, profile,done ) => {
       try {
         if(!profile) {
@@ -21,7 +21,7 @@ export const instagramPassport = passport.use(
             ar: 'فشل المصادقة من أنستجرام'
           }, StatusCodes.BAD_REQUEST);
         }
-        const existingUser = await User.findOne({ email: profile.emails?.[0]?.value });
+        const existingUser:any = await User.findOne({ email: profile.emails?.[0]?.value });
 
         if (existingUser) {
           console.log('user is: ', existingUser)
@@ -38,7 +38,7 @@ export const instagramPassport = passport.use(
           registrationType: 'email',
         });
 
-        const user = await newUser.save();
+        const user: any = await newUser.save();
         return done(null,{user, token: user.createToken()}) ;
       } catch (error:any) {
         throw new ApiError({ en: error.message, ar: error.message }, StatusCodes.BAD_REQUEST);
@@ -46,4 +46,4 @@ export const instagramPassport = passport.use(
       
     }
   )
-);
+) as any;

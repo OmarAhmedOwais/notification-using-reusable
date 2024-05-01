@@ -13,7 +13,8 @@ const passportAuth_middleware_1 = require("../middlewares/passportAuth.middlewar
 const auth_validator_1 = require("../validations/auth.validator");
 const auth_controller_1 = require("../controllers/auth.controller");
 const express_async_handler_1 = __importDefault(require("express-async-handler"));
-const instgramAuth_1 = require("../utils/instgramAuth");
+const instagramAuth_1 = require("../utils/instagramAuth");
+const snapchatAuth_1 = require("../utils/snapchatAuth");
 const authRoute = (0, express_1.Router)();
 authRoute
     .route("/register")
@@ -52,13 +53,23 @@ authRoute.get('/facebook/callback', facebookAuth_1.facebookPassport.authenticate
     res.json({ data: req.user });
 }));
 authRoute.get('/instagram', passportAuth_middleware_1.authenticateWithInstagram);
-authRoute.get('/instagram/callback', instgramAuth_1.instagramPassport.authenticate('instagram', {
+authRoute.get('/instagram/callback', instagramAuth_1.instagramPassport.authenticate('instagram', {
     session: false,
 }), (0, express_async_handler_1.default)(async (req, res) => {
     res.json({ data: req.user });
 }));
 authRoute.get('/twitter', passportAuth_middleware_1.authenticateWithTwitter);
 authRoute.get('/twitter/callback', twitterAuth_1.twitterPassport.authenticate('twitter'), (0, express_async_handler_1.default)(async (req, res) => {
+    res.json({ data: req.user });
+}));
+authRoute.get('/snapchat', passportAuth_middleware_1.authenticateWithSnapchat);
+authRoute.get('/snapchat/callback', snapchatAuth_1.snapchatPassport.authenticate('snapchat', {
+    session: false,
+}), (0, express_async_handler_1.default)(async (req, res) => {
+    res.json({ data: req.user });
+}));
+authRoute.get('/tiktok', passportAuth_middleware_1.authenticateWithTiktok);
+authRoute.get('/tiktok/callback', passportAuth_middleware_1.authenticateWithTiktok, (0, express_async_handler_1.default)(async (req, res) => {
     res.json({ data: req.user });
 }));
 exports.default = authRoute;

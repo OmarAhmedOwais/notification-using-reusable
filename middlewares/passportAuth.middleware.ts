@@ -9,7 +9,7 @@ export const authenticateWithGoogle = googlePassport.authenticate('google', { sc
 
 export const authenticateWithFacebook = facebookPassport.authenticate('facebook', { scope: ['profile', 'email'] });
 
-export const authenticateWithInstagram = instagramPassport.authenticate('instagram', { scope: ['profile', 'email'] });
+export const authenticateWithInstagram = instagramPassport.authenticate('instagram', { scope: ['basic', 'email'] });
 
 export const authenticateWithTwitter = twitterPassport.authenticate('twitter', { scope: ['profile', 'email'] });
 

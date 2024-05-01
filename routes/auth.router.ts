@@ -27,7 +27,7 @@ import {
   resetPassword,
 } from "../controllers/auth.controller";
 import expressAsyncHandler from "express-async-handler";
-import { instagramPassport } from "../utils/instgramAuth";
+import { instagramPassport } from "../utils/instagramAuth";
 import { snapchatPassport } from "../utils/snapchatAuth";
 const authRoute = Router();
 

@@ -1,7 +1,7 @@
 import {googlePassport} from '../utils/googleAuth';
 import { facebookPassport } from '../utils/facebookAuth';
 import { twitterPassport } from '../utils/twitterAuth';
-import { instagramPassport } from '../utils/instgramAuth';
+import { instagramPassport } from '../utils/instagramAuth';
 import { snapchatPassport } from '../utils/snapchatAuth';
 
 
